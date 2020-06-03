@@ -27,7 +27,9 @@ int distance(){
     duration = pulseIn(echoPin, HIGH); // 收到高電位時的時間
 
     cm = (duration / 2) / 29.1; // 將時間換算成距離 cm 或 inch
-    Serial.print("Distance : %d cm"%cm)
+    Serial.print("Distance : ")
+    Serial.print(cm)
+    Serial.print("cm")
     Serial.println();
     return cm;
     //delay(250);
