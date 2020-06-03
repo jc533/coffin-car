@@ -1,12 +1,21 @@
 const int trigPin = 12; //Trig Pin
 const int echoPin = 11; //Echo Pin
 long duration, cm;
+const int In1 = 4;
+const int In2 = 5;
+const int In3 = 6;      
+const int In4 = 7;       
 
 void setup(){
     Serial.begin(9600);       // Serial Port begin
     pinMode(trigPin, OUTPUT); //Define inputs and outputs
     pinMode(echoPin, INPUT);
+    pinMode(In1, OUTPUT);
+    pinMode(In2, OUTPUT);
+    pinMode(In3, OUTPUT);
+    pinMode(In4, OUTPUT);  
 }
+
 int distance(){
     digitalWrite(trigPin, LOW);
     delayMicroseconds(5);
@@ -26,4 +35,32 @@ int distance(){
 void loop(){
     distance()
     delay(250)
+}
+void loop(){
+    mfront();
+    delay(2000);
+    mstop();
+    delay(500);
+    mback();
+    delay(2000);
+    mstop();
+    delay(500);
+}
+void mstop(){
+    digitalWrite(In1, LOW);
+    digitalWrite(In2, LOW);
+    digitalWrite(In3, LOW);
+    digitalWrite(In4, LOW);
+}
+void mfront(){
+    digitalWrite(In1, HIGH);
+    digitalWrite(In2, LOW);
+    digitalWrite(In3, HIGH);
+    digitalWrite(In4, LOW);
+}
+void mback(){
+    digitalWrite(In1, LOW);
+    digitalWrite(In2, HIGH);
+        digitalWrite(In3, LOW);
+    digitalWrite(In4, HIGH);
 }
