@@ -27,7 +27,7 @@ int distance(){
     duration = pulseIn(echoPin, HIGH); // 收到高電位時的時間
 
     cm = (duration / 2) / 29.1; // 將時間換算成距離 cm 或 inch
-    //Serial.print("Distance : %d cm"%cm)
+    Serial.print("Distance : %d cm"%cm)
     Serial.println();
     return cm;
     //delay(250);
@@ -35,16 +35,15 @@ int distance(){
 void loop(){
     distance()
     delay(250)
-}
-void loop(){
-    mfront();
-    delay(2000);
-    mstop();
-    delay(500);
-    mback();
-    delay(2000);
-    mstop();
-    delay(500);
+
+    // mfront();
+    // delay(2000);
+    // mstop();
+    // delay(500);
+    // mback();
+    // delay(2000);
+    // mstop();
+    // delay(500);
 }
 void mstop(){
     digitalWrite(In1, LOW);
@@ -61,6 +60,6 @@ void mfront(){
 void mback(){
     digitalWrite(In1, LOW);
     digitalWrite(In2, HIGH);
-        digitalWrite(In3, LOW);
+    digitalWrite(In3, LOW);
     digitalWrite(In4, HIGH);
 }
