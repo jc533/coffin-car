@@ -6,7 +6,7 @@ const int In2 = 5;
 const int In3 = 6;      
 const int In4 = 7;  
 const int wallDistance = 20;
-
+const int touchDistance = 10;
 void setup(){
     Serial.begin(9600);       // Serial Port begin
     pinMode(trigPin, OUTPUT); //Define inputs and outputs
@@ -42,9 +42,9 @@ bool wait(int waitTime){
     return isTime;
 }
 void loop(){
-    distance();
-    delay(250);
-    time = millis();
+    autoPilot()
+    // distance();
+    // delay(250);
     // mfront();
     // delay(2000);
     // mstop();
@@ -53,10 +53,22 @@ void loop(){
     // delay(2000);
     // mstop();
     // delay(500);
-}
-void auto_pilot(){
-    if(distance() < 30){
-        msfront()
+} 
+// analogWrite(E1Pin, 255);
+// analogWrite(E2Pin, 255);
+// int potValue = analogRead(A0); // Read potentiometer value
+// int pwmOutput = map(potValue, 0, 1023, 0 , 255); // Map the potentiometer value from 0 to 255
+// analogWrite(enA, pwmOutput); // Send PWM signal to L298N Enable pin
+void autoPilot(){
+    time = millis();
+    int wtime = millis()+2000;
+    int dis = distance();
+    while(wait(wtime)){
+        if(dis > touchDistance && dis < wallDistance){
+            msfront()
+        }else if(dis < touchDistance){
+            break;
+        }
     }
 }
 void mstop(){
