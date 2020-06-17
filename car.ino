@@ -7,6 +7,8 @@ const int In3 = 6;
 const int In4 = 7;  
 const int wallDistance = 20;
 const int touchDistance = 10;
+bool isTouch = 0;
+
 void setup(){
     Serial.begin(9600);       // Serial Port begin
     pinMode(trigPin, OUTPUT); //Define inputs and outputs
@@ -65,37 +67,36 @@ void autoPilot(){
     int dis = distance();
     while(wait(wtime)){
         if(dis > touchDistance){
-            msfront()
-        }else if(dis < touchDistance){
-            
+            isTouch = 1;
+            forward();
+        }else if(dis < touchDistance){ 
+            isTouch = 1;
         }
+        if (isTouch){
+            turnLeft();
+            forward();
+        }                                                                                                                                                                                                                                                                                                                                                 
+        
+        
     }
 }
-void stop() { // 馬達停止
+void stop(){                       // 馬達停止
     analogWrite(EA, 0); // 馬達 A 的 PWM 輸出
     analogWrite(EB, 0); // 馬達 B 的 PWM 輸出
 }
-void forward() { // 馬達轉向：前進
+void forward(){                           // 馬達轉向：前進
     analogWrite(EA, speed); // 馬達 A 的 PWM 輸出
     digitalWrite(IA, HIGH);
-    analogWrite(EB, speed); // 馬達 B 的 PWM 輸出
-    digitalWrite(IB, HIGH);
 }
-void backward() { // 馬達轉向：後退
+void backward(){                           // 馬達轉向：後退
     analogWrite(EA, speed); // 馬達 A 的 PWM 輸出
     digitalWrite(IA, LOW);
-    analogWrite(EB, speed); // 馬達 B 的 PWM 輸出
-    digitalWrite(IB, LOW);
 }
-void turnLeft() { // 馬達轉向：左轉
-    analogWrite(EA, speed); // 馬達 A 的 PWM 輸出
-    digitalWrite(IA, LOW); // 馬達 A 反轉
-    analogWrite(EB, speed); // 馬達 B 的 PWM 輸出
-    digitalWrite(IB, HIGH);
+void turnLeft(){                           // 馬達轉向：左轉
+    analogWrite(EB, speed); // 馬達 A 的 PWM 輸出
+    digitalWrite(IB, LOW);  // 馬達 A 反轉
 }
-void turnRight() { // 馬達轉向：右轉
-    analogWrite(EA, speed); // 馬達 A 的 PWM 輸出
-    digitalWrite(IA, HIGH);
+void turnRight(){                           // 馬達轉向：右轉
     analogWrite(EB, speed); // 馬達 B 的 PWM 輸出
-    digitalWrite(IB, LOW); // 馬達 B 反轉
+    digitalWrite(IB, HIGH);  // 馬達 B 反轉
 }

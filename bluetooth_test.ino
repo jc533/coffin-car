@@ -17,26 +17,19 @@ void stop(){                       // 馬達停止
 void forward(){                           // 馬達轉向：前進
     analogWrite(EA, speed); // 馬達 A 的 PWM 輸出
     digitalWrite(IA, HIGH);
-    analogWrite(EB, speed); // 馬達 B 的 PWM 輸出
-    digitalWrite(IB, HIGH);
+    
 }
 void backward(){                           // 馬達轉向：後退
     analogWrite(EA, speed); // 馬達 A 的 PWM 輸出
     digitalWrite(IA, LOW);
-    analogWrite(EB, speed); // 馬達 B 的 PWM 輸出
-    digitalWrite(IB, LOW);
 }
 void turnLeft(){                           // 馬達轉向：左轉
-    analogWrite(EA, speed); // 馬達 A 的 PWM 輸出
-    digitalWrite(IA, LOW);  // 馬達 A 反轉
-    analogWrite(EB, speed); // 馬達 B 的 PWM 輸出
-    digitalWrite(IB, HIGH);
+    analogWrite(EB, speed); // 馬達 A 的 PWM 輸出
+    digitalWrite(IB, LOW);  // 馬達 A 反轉
 }
 void turnRight(){                           // 馬達轉向：右轉
-    analogWrite(EA, speed); // 馬達 A 的 PWM 輸出
-    digitalWrite(IA, HIGH);
     analogWrite(EB, speed); // 馬達 B 的 PWM 輸出
-    digitalWrite(IB, LOW);  // 馬達 B 反轉
+    digitalWrite(IB, HIGH);  // 馬達 B 反轉
 }
 
 void setup(){
@@ -48,8 +41,7 @@ void setup(){
 }
 
 void loop(){
-    if (BT.available() > 0)
-    {
+    if (BT.available()){
         command = BT.read();
 
         switch (command){
