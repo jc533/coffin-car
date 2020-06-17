@@ -64,28 +64,38 @@ void autoPilot(){
     int wtime = millis()+2000;
     int dis = distance();
     while(wait(wtime)){
-        if(dis > touchDistance && dis < wallDistance){
+        if(dis > touchDistance){
             msfront()
         }else if(dis < touchDistance){
-            break;
+            
         }
     }
 }
-void mstop(){
-    digitalWrite(In1, LOW);
-    digitalWrite(In2, LOW);
-    digitalWrite(In3, LOW);
-    digitalWrite(In4, LOW);
+void stop() { // 馬達停止
+    analogWrite(EA, 0); // 馬達 A 的 PWM 輸出
+    analogWrite(EB, 0); // 馬達 B 的 PWM 輸出
 }
-void mfront(){
-    digitalWrite(In1, HIGH);
-    digitalWrite(In2, LOW);
-    digitalWrite(In3, HIGH);
-    digitalWrite(In4, LOW);
+void forward() { // 馬達轉向：前進
+    analogWrite(EA, speed); // 馬達 A 的 PWM 輸出
+    digitalWrite(IA, HIGH);
+    analogWrite(EB, speed); // 馬達 B 的 PWM 輸出
+    digitalWrite(IB, HIGH);
 }
-void mback(){
-    digitalWrite(In1, LOW);
-    digitalWrite(In2, HIGH);
-    digitalWrite(In3, LOW);
-    digitalWrite(In4, HIGH);
+void backward() { // 馬達轉向：後退
+    analogWrite(EA, speed); // 馬達 A 的 PWM 輸出
+    digitalWrite(IA, LOW);
+    analogWrite(EB, speed); // 馬達 B 的 PWM 輸出
+    digitalWrite(IB, LOW);
+}
+void turnLeft() { // 馬達轉向：左轉
+    analogWrite(EA, speed); // 馬達 A 的 PWM 輸出
+    digitalWrite(IA, LOW); // 馬達 A 反轉
+    analogWrite(EB, speed); // 馬達 B 的 PWM 輸出
+    digitalWrite(IB, HIGH);
+}
+void turnRight() { // 馬達轉向：右轉
+    analogWrite(EA, speed); // 馬達 A 的 PWM 輸出
+    digitalWrite(IA, HIGH);
+    analogWrite(EB, speed); // 馬達 B 的 PWM 輸出
+    digitalWrite(IB, LOW); // 馬達 B 反轉
 }
