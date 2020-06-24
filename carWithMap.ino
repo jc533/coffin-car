@@ -9,7 +9,7 @@ int dir = 0;
 int index = 0;
 // 設定 PWM 輸出值
 int speed = 150;
-string map = "lrrllrlr";
+string map = "lrrllrlrx";
 const int trigPin = 12; //Trig Pin
 const int echoPin = 11; //Echo Pin
 long duration, cm;
@@ -66,8 +66,11 @@ void autoPilot(){
             turnRight();
             delay(1000);
             break;
+        case "x":
+            stop();
         }
     }else{
+        turnForward();
         forward();
     }
     
