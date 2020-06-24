@@ -10,7 +10,7 @@ const byte IA = 7; // 馬達 A 的正反轉接腳
 int dir = 0;
 
 // 設定 PWM 輸出值
-const byte speed = 150;
+int speed = 150;
 
 void stop(){                       // 馬達停止
     analogWrite(EA, 0); // 馬達 A 的 PWM 輸出
