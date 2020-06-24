@@ -13,10 +13,6 @@ int speed = 150;
 const int trigPin = 12; //Trig Pin
 const int echoPin = 11; //Echo Pin
 long duration, cm;
-const int In1 = 4;
-const int In2 = 5;
-const int In3 = 6;      
-const int In4 = 7;  
 const int wallDistance = 20;
 const int touchDistance = 10;
 bool isTouch = 0;
@@ -25,10 +21,11 @@ void setup(){
     Serial.begin(9600);       // Serial Port begin
     pinMode(trigPin, OUTPUT); //Define inputs and outputs
     pinMode(echoPin, INPUT);
-    pinMode(In1, OUTPUT);
-    pinMode(In2, OUTPUT);
-    pinMode(In3, OUTPUT);
-    pinMode(In4, OUTPUT);  
+    Serial.println("ready!");
+    myservo.attach(9);
+    myservo.write(88);
+    pinMode(IA, OUTPUT); // 馬達 A 的致能腳位
+    stop();  
 }
 int distance(){
     digitalWrite(trigPin, LOW);
@@ -57,16 +54,6 @@ bool wait(int waitTime){
 }
 void loop(){
     autoPilot()
-    // distance();
-    // delay(250);
-    // mfront();
-    // delay(2000);
-    // mstop();
-    // delay(500);
-    // mback();
-    // delay(2000);
-    // mstop();
-    // delay(500);
 } 
 // analogWrite(E1Pin, 255);
 // analogWrite(E2Pin, 255);
@@ -79,17 +66,11 @@ void autoPilot(){
     int dis = distance();
     while(wait(wtime)){
         if(dis > touchDistance){
-            isTouch = 1;
+            isTouch = 0;
             forward();
         }else if(dis < touchDistance){ 
             isTouch = 1;
-        }
-        if (isTouch){
-            turnLeft();
-            forward();
-        }                                                                                                                                                                                                                                                                                                                                                 
-        
-        
+        }                                                                                                                                                                                                                                                                                                                                               
     }
 }
 
