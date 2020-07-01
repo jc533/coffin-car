@@ -33,7 +33,7 @@ void turnLeft(){
             break;
         default:
             myservo.write(35);
-            dir = -1;
+            dir = 1;
     }   
 }
 void turnRight(){     
