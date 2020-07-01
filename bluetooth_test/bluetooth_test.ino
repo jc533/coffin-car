@@ -62,7 +62,7 @@ void setup(){
         myservo.attach(9);
         myservo.write(108);
         pinMode(IA, OUTPUT); // 馬達 A 的致能腳位
-        // pinMode(IB, OUTPUT); // 馬達 B 的致能腳位
+        pinMode(IB, OUTPUT); // 馬達 B 的致能腳位
         stop();              // 先停止馬達
 }
 
