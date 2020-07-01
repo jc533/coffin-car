@@ -88,15 +88,12 @@ void loop(){
         case 'x': // 接收到 'x'，停止馬達
             stop();
             break;
-        }
         case 'k':
             turnForward();
             break;
-        }
         case 'p':
             speed = 255;
             break;
-        }
         case 'q': // 接收到 'x'，停止馬達
             speed = 150;
             break;
