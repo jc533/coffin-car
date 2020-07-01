@@ -1,12 +1,13 @@
 #include <Wire.h>
 #include <SoftwareSerial.h> // 引用「軟體序列埠」程式庫
 #include <Servo.h> 
-SoftwareSerial BT(10, 11);    // 設定軟體序列埠(接收腳, 傳送腳)
+SoftwareSerial BT(10, 11);  // 設定軟體序列埠(接收腳, 傳送腳)
 Servo myservo;
 
 char command;      // 接收序列埠值的變數
-const byte EA = 6; // 馬達 A 的致能接腳
-const byte IA = 7; // 馬達 A 的正反轉接腳
+const byte EA = 5; // 馬達 A 的致能接腳
+const byte IA = 6; // 馬達 A 的正反轉接腳
+const byte IB = 5;
 int dir = 0;
 
 // 設定 PWM 輸出值
@@ -18,11 +19,13 @@ void stop(){                       // 馬達停止
 void forward(){                           // 馬達轉向：前進
     analogWrite(EA, speed); // 馬達 A 的 PWM 輸出
     digitalWrite(IA, HIGH);
+    digitalWrite(IB, LOW);
 
 }
 void backward(){                           // 馬達轉向：後退
     analogWrite(EA, speed); // 馬達 A 的 PWM 輸出
     digitalWrite(IA, LOW);
+    digitalWrite(IB, HIGH);
 }
 void turnLeft(){   
     switch (dir){
@@ -47,20 +50,20 @@ void turnForward(){
         case 0:
             break;
         default:
-            myservo.write(88);
+            myservo.write(108);
             dir = 0;
     } 
 }
 
 void setup(){
     BT.begin(9600); // 啟動軟體序列埠
-    Serial.begin(38400); // 「序列埠監控視窗」的資料 需要以38400輸出
-    Serial.println("BT is ready!");
-    myservo.attach(9);
-    myservo.write(88);
-    pinMode(IA, OUTPUT); // 馬達 A 的致能腳位
-    // pinMode(IB, OUTPUT); // 馬達 B 的致能腳位
-    stop();              // 先停止馬達
+        Serial.begin(38400); // 「序列埠監控視窗」的資料 需要以38400輸出
+        Serial.println("BT is ready!");
+        myservo.attach(9);
+        myservo.write(108);
+        pinMode(IA, OUTPUT); // 馬達 A 的致能腳位
+        // pinMode(IB, OUTPUT); // 馬達 B 的致能腳位
+        stop();              // 先停止馬達
 }
 
 void loop(){

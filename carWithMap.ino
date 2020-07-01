@@ -60,10 +60,12 @@ void autoPilot(){
         switch (map[++index]){
         case "l":
             turnLeft();
+            forward();
             delay(1000);
             break;
         case "r":
             turnRight();
+            forward();
             delay(1000);
             break;
         case "x":
